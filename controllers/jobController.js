@@ -31,7 +31,7 @@ export const GetJobByCategory = async(req,res)=>{
    try {
          const subcatagory = await SubCategory.findOne({slug:req.params.slug});
          
-         const job = await Job.findOne({subCategory:subcatagory?._id}).populate('category subCategory');
+         const job = await Job.find({subCategory:subcatagory?._id}).populate('category subCategory');
          res.status(200).json(job)
    } catch (error) {
     res.status(500).json({ message: error.message });
