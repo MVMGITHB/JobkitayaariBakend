@@ -5,7 +5,8 @@ import {
   getJobById,
   updateJob,
   deleteJob,
-  getJobBySlug
+  getJobBySlug,
+  updateStatus
 } from '../controllers/jobController.js';
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.get('/getAllJob', getAllJobs);
 // Get a job by ID
 router.get('/getJobById/:id', getJobById);
 router.get('/getJobBySlug/:slug', getJobBySlug);
+router.patch('/toggled/:id', updateStatus);
 
 // Update a job by ID
 router.put('/updateJob/:id', updateJob);
