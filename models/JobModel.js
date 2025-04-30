@@ -25,17 +25,27 @@ const JobSchema = new mongoose.Schema({
   },
 
 
+  
+  companyName:{
+    type:String,
+  },
+
+
 
   title1: {
     type: String,
     // required: true,
     trim: true,
   },
+
+
   title2: {
     type: String,
     // required: true,
     trim: true,
   },
+
+
   title3: {
     type: String,
     // required: true,
