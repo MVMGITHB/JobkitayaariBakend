@@ -1,5 +1,6 @@
 import Job from '../models/JobModel.js';
 import slugify from "slugify";
+import SubCategory from '../models/SubCategory.js';
 // Create a new job
 export const createJob = async (req, res) => {
   try {
@@ -20,11 +21,23 @@ export const createJob = async (req, res) => {
 export const getAllJobs = async (req, res) => {
   try {
     const jobs = await Job.find().populate('category subCategory');
-    res.status(200).json(jobs);
+     res.status(200).json(jobs);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const GetJobByCategory = async(req,res)=>{
+   try {
+         const subcatagory = await SubCategory.findOne({slug:req.params.slug});
+         
+         const job = await Job.findOne({subCategory:subcatagory?._id}).populate('category subCategory');
+         res.status(200).json(job)
+   } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(error)
+   }
+}
 
 // Get a single job by ID
 export const getJobById = async (req, res) => {
