@@ -16,6 +16,13 @@ const JobSchema = new mongoose.Schema({
   },
 
 
+  Jobrole: {
+    type: String,
+    enum: ['Full Time', 'Part Time',"Remote"],
+    default: 'Full Time',
+  },
+
+
   mtitle:{
     type:String,
   },
