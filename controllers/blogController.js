@@ -6,7 +6,7 @@ export const createBlog = async (req, res) => {
   try {
     const blog = new Blog({
       ...req.body,
-      slug: slugify(req.body.title).toLowerCase(),
+      slug: slugify(req?.body?.slug).toLowerCase(),
     });
     await blog.save();
     res.status(201).json(blog);
@@ -70,7 +70,11 @@ export const getBlogBySlug = async (req, res) => {
 // Update Blog
 export const updateBlog = async (req, res) => {
   try {
-    const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+    const blog = await Blog.findByIdAndUpdate(req.params.id, {
+      ...req.body,
+      slug: slugify(req?.body?.slug).toLowerCase(),
+    }, 
+    {
       new: true,
       runValidators: true
     });
