@@ -8,6 +8,9 @@ import subCategoryRoutes from './routes/subCategoryRoutes.js';
 import tagRoutes from './routes/tagRoutes.js'
 import blogRoutes from './routes/blogRoutes.js'
 import jobRoutes from './routes/jobRoutes.js';
+import bestjobRoutes from './routes/bestJobRoutes.js';
+import featurejobRoutes from './routes/featureJobRoutes.js';
+import recentjobRoutes from './routes/recentJobRoutes.js';
 import cors from "cors";
 
 import multer from "multer";
@@ -84,6 +87,9 @@ app.use("/api/subcatagory", subCategoryRoutes);
 app.use("/api/tag", tagRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/job", jobRoutes);
+app.use("/api/bestJob", bestjobRoutes);
+app.use("/api/featueJob", featurejobRoutes);
+app.use("/api/recentJob", recentjobRoutes);
 
 
 
