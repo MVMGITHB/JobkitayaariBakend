@@ -16,7 +16,7 @@ router.post('/createBlog', createBlog);
 router.get('/getAllBlog', getAllBlogs);
 
 router.get('/getOneBlog/:id', getBlogById);
-router.get('/getOneBlog/:slug', getBlogBySlug);
+router.get('/getOneBlogByslug/:slug', getBlogBySlug);
 router.put('/updateBlog/:id', updateBlog);
 router.patch('/toggled/:id', updateStatus);
 router.delete('/deleteBlog/:id', deleteBlog);
