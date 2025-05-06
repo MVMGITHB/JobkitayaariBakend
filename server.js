@@ -38,7 +38,9 @@ const allowedOrigins = new Set([
   "http://localhost:3001",
   "http://localhost:4000",
   "http://localhost:3000",
-  "https://job-pakki-admin.vercel.app"
+  "https://job-pakki-admin.vercel.app",
+  "http://82.25.109.68:3001/",
+  "http://82.25.109.68:3001"
 ]);
 
 // CORS middleware setup

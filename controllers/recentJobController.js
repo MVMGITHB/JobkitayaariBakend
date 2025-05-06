@@ -11,6 +11,9 @@ export const createRecentJob = async (req, res) => {
   }
 };
 
+
+
+
 // Read all
 export const getAllRecentJobs = async (req, res) => {
   try {
