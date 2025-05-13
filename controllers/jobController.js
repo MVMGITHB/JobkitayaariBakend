@@ -37,7 +37,7 @@ export const GetJobByCategory = async (req, res) => {
 
     const job = await Job.find({ subCategory: subcatagory._id })
       .populate('category subCategory')
-      .sort({ status: -1 }); // 'Active' comes before 'Inactive' if using alphabetical sort
+      .sort({ status: 1 }); // 'Active' comes before 'Inactive' if using alphabetical sort
 
     res.status(200).json(job);
   } catch (error) {
