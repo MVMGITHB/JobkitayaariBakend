@@ -27,17 +27,25 @@ export const getAllJobs = async (req, res) => {
   }
 };
 
-export const GetJobByCategory = async(req,res)=>{
-   try {
-         const subcatagory = await SubCategory.findOne({slug:req.params.slug});
-         
-         const job = await Job.find({subCategory:subcatagory?._id}).populate('category subCategory');
-         res.status(200).json(job)
-   } catch (error) {
+export const GetJobByCategory = async (req, res) => {
+  try {
+    const subcatagory = await SubCategory.findOne({ slug: req.params.slug });
+
+    if (!subcatagory) {
+      return res.status(404).json({ message: 'Subcategory not found' });
+    }
+
+    const job = await Job.find({ subCategory: subcatagory._id })
+      .populate('category subCategory')
+      .sort({ status: -1 }); // 'Active' comes before 'Inactive' if using alphabetical sort
+
+    res.status(200).json(job);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
-    console.log(error)
-   }
-}
+  }
+};
+
 
 // Get a single job by ID
 export const getJobById = async (req, res) => {

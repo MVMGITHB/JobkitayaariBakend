@@ -78,6 +78,8 @@ const BlogSchema = new mongoose.Schema(
             default:"Inactive"
           },
 
+         
+
 
   },
   { timestamps: true }
