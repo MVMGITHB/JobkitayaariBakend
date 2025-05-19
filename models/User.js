@@ -7,11 +7,11 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     phone: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    dateOfBirth: { type: Date, required: true },
+    dateOfBirth: { type: String },
     specialization: {
       type: String,
       enum: ["tech", "govern", "bank"],
-      required: true,
+      
     },
 
     isVerified: {
