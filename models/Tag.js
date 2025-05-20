@@ -7,7 +7,14 @@ const TagSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true
-    }
+    },
+
+    status:{
+    type:String,
+    default:"Inactive"
+  },
+
+
   },
   { timestamps: true }
 );

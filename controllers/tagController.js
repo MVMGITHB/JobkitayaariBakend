@@ -33,6 +33,30 @@ export const getTagById = async (req, res) => {
   }
 };
 
+
+
+export const updateStatus = async (req, res) => {
+    try {
+  
+      let Categories = await Tag.findById(req.params.id)
+     
+  
+      if (!Categories) return res.status(404).json({ error: "Blog not found" });
+  
+      if(Categories.status ==='Inactive')  {
+        Categories.status ='Active'
+      }else{
+        Categories.status ='Inactive'
+      }
+  
+     const Categori =  await  Categories.save()
+  
+      res.json(Categori);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  };
+
 // Update a tag
 export const updateTag = async (req, res) => {
   try {
