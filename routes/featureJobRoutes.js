@@ -4,7 +4,8 @@ import {
   getAllFeatureJobs,
   getFeatureJobById,
   updateFeatureJob,
-  deleteFeatureJob
+  deleteFeatureJob,
+  updateStatus
 } from '../controllers/featureJobController.js';
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.get('/getAllFeatureJob', getAllFeatureJobs);
 router.get('/getOneFeatureJob/:id', getFeatureJobById);
 router.put('/updateFeatureJob/:id', updateFeatureJob);
 router.delete('/deleteFeatureJob/:id', deleteFeatureJob);
+router.patch('/toggled/:id', updateStatus);
 
 export default router;
