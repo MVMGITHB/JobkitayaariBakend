@@ -7,17 +7,21 @@ import {
   getAllUser,
   getAllAdmin,
   updateStatus,
-  deleteUser
+  deleteUser,
+  updateUser,
+  getUserByslug
 } from "../controllers/authController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
+router.patch("/updateUser/:id",updateUser);
 router.post("/login", loginUser);
 router.post("/logout", protect, logoutUser);
 router.get("/verify-email", verifyEmail);
 router.get("/getAllUsers", getAllUser);
+router.get("/singleUserbyslug/:slug", getUserByslug);
 router.get("/getAllAdmin", getAllAdmin);
 router.patch('/toggled/:id', updateStatus);
 router.delete('/deleteUser/:id', deleteUser);

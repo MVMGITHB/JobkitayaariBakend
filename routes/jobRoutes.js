@@ -7,7 +7,8 @@ import {
   deleteJob,
   getJobBySlug,
   updateStatus,
-  GetJobByCategory
+  GetJobByCategory,
+  
 } from '../controllers/jobController.js';
 
 
@@ -18,6 +19,8 @@ router.post('/createJob', createJob);
 
 // Get all jobs
 router.get('/getAllJob', getAllJobs);
+
+
 
 // Get a job by ID
 router.get('/getJobById/:id', getJobById);

@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       
     },
 
+    image:{
+   type:String,
+    },
+
     isVerified: {
       type: Boolean,
       default: false,
@@ -34,7 +38,39 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'admin', 'superAdmin', 'seoAdmin'],
       default: 'user',
     },
+
+    shortBio:{
+       type:String,
+    },
+
+    tag:{
+      type:String,
+    },
+
+
+    slug: {
+      type: String,
+      // unique: true,
+      index: true,
+    },
+
+    socialMedia: {
+      facebook: { type: String },
+      linkedin: { type: String },
+      twitter: { type: String },
+      profile: { type: String }
   },
+
+ blog:  [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Blog', 
+          default: null,
+        }],
+  },
+
+  
+
+
   { timestamps: true }
 
   

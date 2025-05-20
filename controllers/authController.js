@@ -3,13 +3,42 @@ import generateToken from "../utils/generateToken.js";
 import crypto from "crypto";
 import  sendVerificationEmail from "../utils/sendEmail.js";
 
+import slugify from 'slugify';
 
 
 // @desc   Register a new user
 // @route  POST /api/auth/register
 // @access Public
+
+
+
+  //   shortBio:{
+  //      type:String,
+  //   },
+
+  //   tag:{
+  //     type:String,
+  //   },
+
+
+  //   slug: {
+  //     type: String,
+  //     // unique: true,
+  //     index: true,
+  //   },
+
+  //   socialMedia: {
+  //     facebook: { type: String },
+  //     linkedin: { type: String },
+  //     twitter: { type: String },
+  //     profile: { type: String }
+  // },
+
+  //  blog: [{ type: ObjectId, ref: "Blog" }],
+  // },
+
 export const registerUser = async (req, res) => {
-  const { name, email, phone, password, dateOfBirth, specialization ,role} = req.body;
+  const { name, email, phone, password, dateOfBirth, specialization ,role,shortBio,tag,slug,socialMedia,blog,image} = req.body;
 
   try {
     const userExists = await User.findOne({ $or: [{ email }, { phone }] });
@@ -26,7 +55,13 @@ export const registerUser = async (req, res) => {
       dateOfBirth,
       specialization,
       verificationToken,
-      role
+      role,
+      shortBio,
+      tag,
+      slug:slug?slugify(req.body.slug).toLowerCase():"",
+      socialMedia,
+      blog,
+      image,
     });
 
     await sendVerificationEmail(email, verificationToken);
@@ -147,6 +182,66 @@ export const getAllAdmin = async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 };
+
+
+ export const updateUser = async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+     const { name, email, phone, dateOfBirth, specialization ,role,shortBio,tag,slug,socialMedia,blog,image} = req.body;
+
+    if (email) user.email = email;
+    if (name) user.name = name;
+    if (phone) user.phone = phone;
+    if (dateOfBirth) user.dateOfBirth = dateOfBirth;
+    if (image) user.image = image;
+    if (role) user.role = role;
+    if (shortBio) user.shortBio = shortBio;
+    if (tag) user.tag = tag;
+    if (specialization) user.specialization = specialization;
+    if (socialMedia) user.socialMedia = socialMedia;
+    if(slug) user.slug = slugify(slug).toLowerCase()
+
+    // Append new blog ID(s) instead of replacing
+    if (blog) {
+      if (Array.isArray(blog)) {
+        user.blog.push(...blog); // Add multiple blog IDs
+      } else {
+        user.blog.push(blog); // Add a single blog ID
+      }
+    }
+
+    await user.save();
+    res.status(200).json({ message: "User updated successfully", user });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getUserByslug= async(req,res)=>{
+      try {
+          
+        const user = await User.find({slug:req.params.slug}).populate({
+          path: 'blog',
+          populate: [
+            { path: 'category', model: 'Category' },
+            { path: 'subCategory', model: 'SubCategory' }
+          ]
+        });
+        if(!user){
+          res.status(400).json({message:"User not found"})
+        }
+        res.status(200).json(user)
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+      }
+}
 
 
 
