@@ -223,6 +223,36 @@ export const getAllAdmin = async (req, res) => {
   }
 };
 
+
+
+export const deleteUserBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { blogsToDelete } = req.body;
+
+    if (!Array.isArray(blogsToDelete) || blogsToDelete.length === 0) {
+      return res.status(400).json({ message: "No blogs provided to delete" });
+    }
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Filter out blog IDs to delete
+    user.blog = user.blog.filter(
+      (blogId) => !blogsToDelete.includes(blogId.toString())
+    );
+
+    await user.save();
+    res.status(200).json({ message: "Blog(s) deleted from user", blog: user.blog });
+
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const getUserByslug= async(req,res)=>{
       try {
           
