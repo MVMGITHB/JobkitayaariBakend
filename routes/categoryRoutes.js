@@ -5,7 +5,8 @@ import {
   getCategoryById,
   updateCategory,
   deleteCategory,
-  updateStatus
+  updateStatus,
+  
 } from '../controllers/categoryController.js'; // Assuming the controller is in the 'controllers' directory
 
 const router = express.Router();

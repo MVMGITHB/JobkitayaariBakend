@@ -1,6 +1,7 @@
 import Blog from '../models/BlogModel.js';
 import slugify from "slugify";
-
+ 
+import Category from '../models/CatagoryModel.js'
 // Create Blog
 export const createBlog = async (req, res) => {
   try {
@@ -20,6 +21,24 @@ export const createBlog = async (req, res) => {
 export const getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find()
+      .populate('category')
+      .populate('subCategory')
+      .populate('author')
+      .populate('tag')
+      .sort({ createdAt: -1 });
+    res.status(200).json(blogs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+export const getBlogsByCategorySlug = async (req, res) => {
+  try {
+
+   const category = await Category.findOne({slug:req.params.slug});
+
+    const blogs = await Blog.find({category:category?._id})
       .populate('category')
       .populate('subCategory')
       .populate('author')
