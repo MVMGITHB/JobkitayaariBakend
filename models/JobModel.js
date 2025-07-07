@@ -238,6 +238,16 @@ const JobSchema = new mongoose.Schema({
   },
 
 
+  images: {
+  type: [String],
+  default: [],
+},
+
+    link: {
+  type: [String],
+},
+
+
   updatedAt: {
     type: Date,
     default: Date.now,

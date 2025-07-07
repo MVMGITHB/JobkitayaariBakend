@@ -19,6 +19,17 @@ const BestJobSchema = new mongoose.Schema({
     type: String,
     default: "Inactive"
   },
+
+
+    images: {
+  type: [String],
+  default: [],
+},
+
+    link: {
+  type: [String],
+},
+
   updatedAt: {
     type: Date,
     default: Date.now,
