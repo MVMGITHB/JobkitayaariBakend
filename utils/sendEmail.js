@@ -41,7 +41,9 @@ const sendVerificationEmail = async (email, token) => {
       <p style="color:#555; font-size:15px; line-height:1.6;">
         Start exploring today’s <strong>latest job updates</strong> with us.  
       </p>
+       
 
+      <h4 style="color:#333;">Please click link below to confirm your Email</h2>
       <div style="text-align:center; margin:30px 0;">
         <a href="${verifyLink}" style="padding:12px 24px; background-color:#27ae60; color:#fff; text-decoration:none; font-weight:bold; border-radius:5px; display:inline-block;">
           ✅ Confirm My Email
