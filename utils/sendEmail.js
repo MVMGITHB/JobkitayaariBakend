@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 
 const sendVerificationEmail = async (email, token) => {
   // const verifyLink = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
-  const verifyLink = `https://api.jobkityaari.com/verify-email?token=${token}`;
+  const verifyLink = `https://api.jobkityaari.com/api/auth/verify-email?token=${token}`;
    console.log(email)
   const mailOptions = {
     from: process.env.SMTP_MAIL,
